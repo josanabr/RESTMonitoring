@@ -96,7 +96,7 @@ def whou(user):
 	return jsonify({'loggedin': output})
 
 #
-# Method used to determine CPU waiting time I/O. Command to be used 'vmstat'
+# Method used to determine CPU usage. Command to be used 'vmstat'
 #
 @app.route('/cpu/<string:param>', methods = ['GET'])
 def cpuwa(param):
@@ -160,4 +160,4 @@ def swap(param):
 	return jsonify({'swap %s' % param: output})
 
 if __name__ == '__main__':
-	app.run(debug = True)
+	app.run(debug = True, host='0.0.0.0')
