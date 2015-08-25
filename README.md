@@ -28,27 +28,24 @@ At this time the following resources are available
 	* *GET* **/os/hardware**
 
 * *GET* **/who** returns in JSON format the users connected at that time
-	* *GET* **/who/<user>** returns if a specific `<user>` is connected
+	* *GET* **/who/\<user\>** returns if a specific `<user>` is connected
 
-* *GET* **/cpu/<type>** returns in JSON format the CPU usage. Possible values for `<type>`:
+* *GET* **/cpu/\<type\>** returns in JSON format the CPU usage. Possible values for `<type>`:
 	* **us** user
 	* **sy** system
 	* **id** idle
 	* **wa** waiting 
 	* **st** time stolen by virtual machines
 
-* *GET* **/mem/<type>** returns in JSON format the RAM usage. Possible values for `<type>`:
+* *GET* **/mem/\<type\>** returns in JSON format the RAM usage. Possible values for `<type>`:
 	* **swpd** swap
 	* **free** free
 	* **buff** buffered
 	* **cache** cached 
 
-* *GET* **/swap/<type>** returns in JSON format the SWAP behaviour. Possible values for `<type>`:
+* *GET* **/swap/\<type\>** returns in JSON format the SWAP behaviour. Possible values for `<type>`:
 	* **si** memory swapped in
 	* **so** memory swapped out
-	* **buff** buffered
-	* **cache** cached 
-	* **st** time stolen by virtual machines
 
 Installation
 ============
