@@ -5,6 +5,15 @@ import subprocess
 
 app = Flask(__name__)
 
+def myPopenPipe(tupla, command):
+	return subprocess.Popen(tupla, stdin = command.stdout, stdout = subprocess.PIPE)
+
+def myCheckOutput(tupla, command):
+	return subprocess.check_output(tupla, stdin = command.stdout)
+
+def myPopen(tupla):
+	return subprocess.Popen(tupla, stdout = subprocess.PIPE)
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -140,6 +149,25 @@ def mem(param):
 
 	output = subprocess.check_output(['cut', '-d', ' ', '-f', value], stdin = tr.stdout)
 	return jsonify({'mem %s' % param: output})
+
+#
+# Method used to give information about space occupied by root ('/') 
+# linux partition
+#
+@app.route('/partition', methods = ['GET'])
+def df():
+	partition = "/"
+	# This is the command to be executed
+	# df / | head -n +2 | tail -n +2 | tr -s ' ' | cut -d ' ' -f 5 | \
+	# cut -d '%' -f 1
+
+	df = myPopen(['df', partition])
+	head = myPopenPipe(['head','-n','+2'], df)
+	tail = myPopenPipe(['tail', '-n', '+2'], head)
+	tr = myPopenPipe(['tr', '-s', ' '], tail)
+	cut = myPopenPipe(['cut', '-d', ' ', '-f', '5'], tr)
+	output = myCheckOutput(['cut', '-d', '%', '-f', '1'], cut)
+	return jsonify({'hdfree ':output[:-1]})
 
 #
 # Method used to determine SWAP behaviour. Command to be used 'vmstat'
