@@ -167,7 +167,7 @@ def df():
 	tr = myPopenPipe(['tr', '-s', ' '], tail)
 	cut = myPopenPipe(['cut', '-d', ' ', '-f', '5'], tr)
 	output = myCheckOutput(['cut', '-d', '%', '-f', '1'], cut)
-	return jsonify({'hdfree ':output[:-1]})
+	return jsonify({'hdused ':output[:-1]})
 
 #
 # Method used to determine SWAP behaviour. Command to be used 'vmstat'
